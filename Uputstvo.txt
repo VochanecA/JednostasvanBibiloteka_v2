@@ -1,0 +1,11 @@
+Standardno :
+
+npm install
+
+npx prisma migrate
+
+npx prisma generate
+
+npm run dev
+
+Fajl podaci.sql...su za popunjavanje dummy podataka.

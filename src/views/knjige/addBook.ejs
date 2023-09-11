@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <%- include('../includes/layout/meta') %> 
+
+
+    <!-- Styles -->
+    <%- include('../includes/layout/styles') %> 
+    <!-- End Styles -->
+</head>
+
+<body class="small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
+    <!-- Header -->
+    <%- include('../includes/layout/header') %> 
+    <!-- Header -->
+
+    <!-- Main content -->
+    <main class="flex flex-row small:hidden">
+        <!-- Sidebar -->
+        <%- include('../includes/layout/sidebar') %> 
+        <!-- End Sidebar -->
+
+        <!-- Content -->
+        <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
+            <!-- Heading of content -->
+            <div class="heading mt-[7px]">
+                <h1 class="pl-[30px] pb-[21px]  border-b-[1px] border-[#e4dfdf] ">
+                    Dashboard
+                </h1>
+            </div>
+            <!-- Space for content -->
+            <div class="pl-[30px] scroll height-dashboard overflow-auto mt-[20px] pb-[30px]">
+                <div class="flex flex-row justify-between">
+
+<form action="/books/addBook" method="POST">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required>
+  
+    <label for="page_count">Page Count:</label>
+    <input type="number" id="page_count" name="page_count" required>
+  
+    <label for="letterId">Letter ID:</label>
+    <input type="number" id="letterId" name="letterId" required>
+  
+    <label for="languageId">Language ID:</label>
+    <input type="number" id="languageId" name="languageId" required>
+  
+    <label for="bindingId">Binding ID:</label>
+    <input type="number" id="bindingId" name="bindingId" required>
+  
+    <label for="formatId">Format ID:</label>
+    <input type="number" id="formatId" name="formatId" required>
+  
+    <label for="publisherId">Publisher ID:</label>
+    <input type="number" id="publisherId" name="publisherId" required>
+  
+    <label for="isbn">ISBN:</label>
+    <input type="text" id="isbn" name="isbn" required>
+  
+    <label for="quantity_count">Quantity Count:</label>
+    <input type="number" id="quantity_count" name="quantity_count" required>
+  
+    <label for="rented_count">Rented Count:</label>
+    <input type="number" id="rented_count" name="rented_count" required>
+  
+    <label for="reserved_count">Reserved Count:</label>
+    <input type="number" id="reserved_count" name="reserved_count" required>
+  
+    <label for="body">Body:</label>
+    <textarea id="body" name="body" required></textarea>
+  
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="year" required>
+  
+    <label for="pdf">PDF:</label>
+    <input type="text" id="pdf" name="pdf" required>
+  
+    <button type="submit">Add Book</button>
+  </form>
+</section>
+<!-- End Content -->
+</main>
+<!-- End Main content -->
+
+<!-- Notification for small devices -->
+<%- include('../includes/layout/inProgress') %> 
+
+
+<!-- Scripts -->
+<%- include('../includes/layout/scripts') %> 
+<!-- End Scripts -->
+
+</body>
+
+</html>

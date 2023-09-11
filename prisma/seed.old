@@ -1,0 +1,284 @@
+﻿import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+async function main() {
+  // Create users
+ const users = [
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    password: 'password123',
+    username: 'john',
+    JMBG: '8935147848055',
+    photo: 'photo1.jpg',
+    remember_token: 'token123',
+    email_verified_at: new Date(),
+  },
+  {
+    name: 'Jane Smith',
+    email: 'janesmith@example.com',
+    password: 'password456',
+    username: 'jane',
+    JMBG: '1234567890123',
+    photo: 'photo2.jpg',
+    remember_token: 'token456',
+    email_verified_at: new Date(),
+  },
+  {
+    name: 'Bob Johnson',
+    email: 'bobjohnson@example.com',
+    password: 'password789',
+    username: 'bob',
+    JMBG: '9876543210987',
+    photo: 'photo3.jpg',
+    remember_token: 'token789',
+    email_verified_at: new Date(),
+  },
+];
+
+for (const user of users) {
+  await prisma.user.create({
+    data: {
+      name: user.name,
+      email: user.email,
+      password: user.password,
+      username: user.username,
+      JMBG: user.JMBG,
+      photo: user.photo,
+      remember_token: user.remember_token,
+      email_verified_at: user.email_verified_at,
+    },
+  });
+}
+
+
+  // Create Reservation 1
+  await prisma.reservation.create({
+    data: {
+      book: {
+        connect: {
+          id: 1,
+        },
+      },
+      reservationMadeForUser: {
+        connect: {
+          id: 1,
+        },
+      },
+      reservationMadeByUser: {
+        connect: {
+          id: 2,
+        },
+      },
+      closeUser: {
+        connect: {
+          id: 2,
+        },
+      },
+      closureReason: {
+        connect: {
+          id: 1,
+        },
+      },
+      request_date: new Date(),
+      reservation_date: new Date(),
+      close_date: new Date(),
+    },
+  });
+
+  // Create Reservation 2
+  await prisma.reservation.create({
+    data: {
+      book: {
+        connect: {
+          id: 2,
+        },
+      },
+      reservationMadeForUser: {
+        connect: {
+          id: 2,
+        },
+      },
+      reservationMadeByUser: {
+        connect: {
+          id: 1,
+        },
+      },
+      closeUser: {
+        connect: {
+          id: 1,
+        },
+      },
+      closureReason: {
+        connect: {
+          id: 2,
+        },
+      },
+      request_date: new Date(),
+      reservation_date: new Date(),
+      close_date: new Date(),
+    },
+  });
+
+  // Create Letter
+  const letter = await prisma.letter.create({
+    data: {
+      name: 'A',
+    },
+  });
+
+  // Create Language
+  const language = await prisma.language.create({
+    data: {
+      name: 'English',
+    },
+  });
+
+  // Create Binding
+  const binding = await prisma.binding.create({
+    data: {
+      name: 'Hardcover',
+    },
+  });
+
+  // Create Format
+  const format = await prisma.format.create({
+    data: {
+      name: 'Paperback',
+    },
+  });
+
+  // Create Publisher
+  const publisher = await prisma.publisher.create({
+    data: {
+      name: 'Penguin Random House',
+    },
+  });
+
+  // Create Book 1
+  await prisma.book.create({
+    data: {
+      title: 'The Great Gatsby',
+      page_count: 180,
+      letter: {
+        connect: {
+          id: letter.id,
+        },
+      },
+      language: {
+        connect: {
+          id: language.id,
+        },
+      },
+      binding: {
+        connect: {
+          id: binding.id,
+        },
+      },
+      format: {
+        connect: {
+          id: format.id,
+        },
+      },
+      publisher: {
+        connect: {
+          id: publisher.id,
+        },
+      },
+      isbn: '978-3-16-148410-0',
+      quantity_count: 10,
+      rented_count: 0,
+      reserved_count: 0,
+      body: 'The Great Gatsby is a 1925 novel by American writer F. Scott Fitzgerald.',
+      year: 1925,
+      pdf: 'http:pdf',
+    },
+  });
+
+  // Create Book 2
+  await prisma.book.create({
+    data: {
+      title: 'To Kill a Mockingbird',
+      page_count: 281,
+      letter: {
+        connect: {
+          id: letter.id,
+        },
+      },
+      language: {
+        connect: {
+          id: language.id,
+        },
+      },
+      binding: {
+        connect: {
+          id: binding.id,
+        },
+      },
+      format: {
+        connect: {
+          id: format.id,
+        },
+      },
+      publisher: {
+        connect: {
+          id: publisher.id,
+        },
+      },
+      isbn: '978-0-06-112008-4',
+      quantity_count: 5,
+      rented_count: 0,
+      reserved_count: 0,
+      body: 'To Kill a Mockingbird is a novel by Harper Lee published in 1960.',
+      year: 1960,
+      pdf: 'http:pdf',
+    },
+  });
+
+  // Create Book 3
+  await prisma.book.create({
+    data: {
+      title: '1984',
+      page_count: 328,
+      letter: {
+        connect: {
+          id: letter.id,
+        },
+      },
+      language: {
+        connect: {
+          id: language.id,
+        },
+      },
+      binding: {
+        connect: {
+          id: binding.id,
+        },
+      },
+      format: {
+        connect: {
+          id: format.id,
+        },
+      },
+      publisher: {
+        connect: {
+          id: publisher.id,
+        },
+      },
+      isbn: '978-0-14-103614-4',
+      quantity_count: 7,
+      rented_count: 0,
+      reserved_count: 0,
+      body: '1984 is a dystopian novel by George Orwell published in 1949.',
+      year: 1949,
+      pdf: 'http:pdf',
+    },
+  });
+}
+
+main()
+  .catch((e) => console.error(e))
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
